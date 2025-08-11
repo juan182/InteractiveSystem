@@ -543,7 +543,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 112183919}
-  - component: {fileID: 112183918}
   - component: {fileID: 112183917}
   m_Layer: 0
   m_Name: AudioManager
@@ -564,104 +563,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a2d48d562ebe94980c9a9e1ced1ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusic: {fileID: 8300000, guid: 10ea0c6ecdfbe594d85161c221bce875, type: 3}
---- !u!82 &112183918
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112183916}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 0.217
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  effect:
+  - {fileID: 8300000, guid: 1916972b0254443a2ac996968e38335c, type: 3}
+  - {fileID: 8300000, guid: f17bac10ee4c44148a1e9088e7540c55, type: 3}
+  - {fileID: 8300000, guid: 4bc21899eae7448ccaf4ebdd49cfcd9f, type: 3}
+  music:
+  - {fileID: 8300000, guid: b90b002a8cd137243a4b5e955f3b220f, type: 3}
+  - {fileID: 8300000, guid: 6b99e4ca54feb1c499bd45b2c95dfde1, type: 3}
 --- !u!4 &112183919
 Transform:
   m_ObjectHideFlags: 0
@@ -1401,8 +1309,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cheesePrefab: {fileID: 8652628572599448763, guid: d5ae156282b8f3b4691e466d0d686fc1, type: 3}
-  soundEffect: {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
   interactionIndicator: {fileID: 743099642}
+  action: 0
+  audioManager: {fileID: 112183917}
 --- !u!1001 &210000513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8782,6 +8691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  audioManager: {fileID: 0}
 --- !u!4 &676716288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4105362945620786471, guid: ebea5f8b8163f9a4ab9d9a1b45444e28, type: 3}
@@ -8803,6 +8713,7 @@ MonoBehaviour:
   locationB: {fileID: 756139249}
   spawnPoint: {fileID: 274462469}
   objectToActivateAtFive: {fileID: 2102179067}
+  audioManager: {fileID: 0}
 --- !u!1 &678757457
 GameObject:
   m_ObjectHideFlags: 0
@@ -31257,8 +31168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cheesePrefab: {fileID: 8652628572599448763, guid: d5ae156282b8f3b4691e466d0d686fc1, type: 3}
-  soundEffect: {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
   interactionIndicator: {fileID: 743099642}
+  action: 0
+  audioManager: {fileID: 112183917}
 --- !u!61 &1031005948
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -31512,8 +31424,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cheesePrefab: {fileID: 8652628572599448763, guid: d5ae156282b8f3b4691e466d0d686fc1, type: 3}
-  soundEffect: {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
   interactionIndicator: {fileID: 743099642}
+  action: 0
+  audioManager: {fileID: 112183917}
 --- !u!4 &1194897738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3564026850829729314, guid: b51901e6748833e4695e0c1db509dcd4, type: 3}
@@ -32621,8 +32534,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cheesePrefab: {fileID: 8652628572599448763, guid: d5ae156282b8f3b4691e466d0d686fc1, type: 3}
-  soundEffect: {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
   interactionIndicator: {fileID: 743099642}
+  action: 0
+  audioManager: {fileID: 112183917}
 --- !u!61 &1491657635
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -33351,8 +33265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cheesePrefab: {fileID: 8652628572599448763, guid: d5ae156282b8f3b4691e466d0d686fc1, type: 3}
-  soundEffect: {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
   interactionIndicator: {fileID: 743099642}
+  action: 0
+  audioManager: {fileID: 0}
 --- !u!61 &1565641701
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -33399,6 +33314,51 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.96128, y: 3.1001544}
   m_EdgeRadius: 0
+--- !u!1 &1626577687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1626577689}
+  - component: {fileID: 1626577688}
+  m_Layer: 0
+  m_Name: AudioTester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1626577688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626577687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: addb1837c9a42bf4f85314ae1ee78a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioManager: {fileID: 112183917}
+--- !u!4 &1626577689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626577687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.74327, y: 3.75725, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1635611582
 GameObject:
   m_ObjectHideFlags: 0
@@ -34882,8 +34842,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cheesePrefab: {fileID: 8652628572599448763, guid: d5ae156282b8f3b4691e466d0d686fc1, type: 3}
-  soundEffect: {fileID: 8300000, guid: 11a7e71782ae6430390d783bc08409df, type: 3}
   interactionIndicator: {fileID: 743099642}
+  action: 0
+  audioManager: {fileID: 112183917}
 --- !u!1 &2092968778
 GameObject:
   m_ObjectHideFlags: 0
@@ -35292,3 +35253,4 @@ SceneRoots:
   - {fileID: 780606906}
   - {fileID: 412505428}
   - {fileID: 59573347}
+  - {fileID: 1626577689}

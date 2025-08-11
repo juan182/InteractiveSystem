@@ -2,50 +2,76 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Movimiento
+    float horizontal;
     public float speed = 5f;
 
-    private Rigidbody2D rb;
+    //Animacion
     private Animator animator;
-    private Vector2 movement;
+
+    //Audio
+    [SerializeField] private AudioManager audioManager;
+
+    //Posicion
+    private Vector2 initialPosition;
 
     private Vector3 originalScale;
+
+    //RigidBody
+    private Rigidbody2D rb;
+
+    //Marcas
+    private bool miss = false;
+    private bool isLookingUp;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        originalScale = transform.localScale;
+
+        //Posicion 
+        initialPosition = transform.position;
+
+        //Extra
+        //originalScale = transform.localScale;
     }
 
     void Update()
     {
-        float moveInput = 0f;
+        //Direccion
+        horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        //Movimiento
+        if (horizontal < 0)
         {
-            moveInput = -1f;
-            transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+            transform.localScale = new Vector2(-1, 1);
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            moveInput = 1f;
-            transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
-        }
+        else if (horizontal > 0) transform.localScale = new Vector2(1, 1);
 
-        movement = new Vector2(moveInput, 0f);
-        animator.SetBool("isRun", moveInput != 0f);
+        animator.SetBool("isRun", horizontal != 0);
 
-        bool isLookingUp = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        //Mirar hacia arriba
+        isLookingUp = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
         animator.SetBool("isLookUp", isLookingUp);
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Application.Quit();
         }
+
+        if (miss == true)
+        {
+            ResetPosition();
+        }
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = initialPosition;
     }
 }

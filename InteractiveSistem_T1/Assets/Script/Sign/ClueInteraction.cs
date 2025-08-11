@@ -1,18 +1,20 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ClueInteraction : MonoBehaviour
 {
     public GameObject cheesePrefab;
-    public AudioClip soundEffect;
-    public GameObject interactionIndicator; // Objeto que se activa cuando el jugador está cerca
+    public GameObject interactionIndicator;
+    public bool action = false; // Indica si el jugador puede interactuar
 
     private bool isPlayerNearby = false;
+
+    [SerializeField] private AudioManager audioManager; // Referencia al AudioManager
 
     void Start()
     {
         if (interactionIndicator != null)
         {
-            interactionIndicator.SetActive(false); // Asegúrate de que inicie desactivado
+            interactionIndicator.SetActive(false); // Inicia desactivado
         }
     }
 
@@ -20,11 +22,13 @@ public class ClueInteraction : MonoBehaviour
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
         {
-            if (soundEffect != null)
+            // ðŸ”¹ Reproducir audio effect(1) al presionar E estando cerca
+            if (audioManager != null)
             {
-                AudioSource.PlayClipAtPoint(soundEffect, transform.position);
+                audioManager.EffectReproduction(1);
             }
 
+            // Instanciar queso
             if (cheesePrefab != null)
             {
                 Instantiate(cheesePrefab, transform.position, Quaternion.identity);
@@ -39,10 +43,17 @@ public class ClueInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = true;
+            action = true; // Jugador cerca â†’ puede interactuar
+
+            // ðŸ”¹ Mantener sonido al entrar (Effect 0)
+            if (audioManager != null)
+            {
+                audioManager.EffectReproduction(0);
+            }
 
             if (interactionIndicator != null)
             {
-                interactionIndicator.SetActive(true); // Mostrar señal visual
+                interactionIndicator.SetActive(true);
             }
         }
     }
@@ -52,10 +63,11 @@ public class ClueInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
+            action = false; // Jugador lejos â†’ no puede interactuar
 
             if (interactionIndicator != null)
             {
-                interactionIndicator.SetActive(false); // Ocultar señal visual
+                interactionIndicator.SetActive(false);
             }
         }
     }
