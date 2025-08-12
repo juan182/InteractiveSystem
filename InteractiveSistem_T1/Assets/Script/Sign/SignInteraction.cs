@@ -1,15 +1,17 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SignInteraction : MonoBehaviour
 {
     public GameObject messagePanel;         // Panel con el mensaje del letrero
     public GameObject interactionIndicator; // Elemento visual que se activa al acercarse
 
+    [SerializeField] private AudioManager audioManager; // 🔹 Referencia al AudioManager
+
     private bool playerInRange = false;
 
     void Start()
     {
-        // Asegurarse que los elementos est�n desactivados al iniciar
+        // Asegurarse que los elementos estén desactivados al iniciar
         if (messagePanel != null)
             messagePanel.SetActive(false);
 
@@ -21,6 +23,12 @@ public class SignInteraction : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.R))
         {
+            // 🔹 Reproducir sonido effect(3) al presionar R
+            if (audioManager != null)
+            {
+                audioManager.EffectReproduction(3);
+            }
+
             if (messagePanel != null)
                 messagePanel.SetActive(true);
         }
@@ -47,7 +55,7 @@ public class SignInteraction : MonoBehaviour
                 messagePanel.SetActive(false); // Ocultar el mensaje al alejarse
 
             if (interactionIndicator != null)
-                interactionIndicator.SetActive(false); // Ocultar el indicador tambi�n
+                interactionIndicator.SetActive(false); // Ocultar el indicador también
         }
     }
 }

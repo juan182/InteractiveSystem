@@ -6,8 +6,9 @@ public class CheeseCollector : MonoBehaviour
     public Transform locationB;
     public Transform spawnPoint;
     public GameObject objectToActivateAtFive;
+    public GameObject Rat;
 
-    [SerializeField] private AudioManager audioManager; // 🔹 Referencia al AudioManager
+    [SerializeField] private AudioManager audioManager;
 
     private int cheeseCount = 0;
 
@@ -17,10 +18,20 @@ public class CheeseCollector : MonoBehaviour
         {
             cheeseCount++;
 
-            // 🔹 Reproducir sonido effect(2) al recoger queso
+            // 🔹 Sonido al recoger queso
             if (audioManager != null)
             {
                 audioManager.EffectReproduction(2);
+
+                // Cambios de música
+                if (cheeseCount == 3)
+                {
+                    audioManager.MusicReproduction(1);
+                }
+                else if (cheeseCount == 4)
+                {
+                    audioManager.MusicReproduction(0);
+                }
             }
 
             Destroy(other.gameObject);
@@ -40,7 +51,21 @@ public class CheeseCollector : MonoBehaviour
 
                 if (objectToActivateAtFive != null)
                     objectToActivateAtFive.SetActive(true);
+                if (audioManager != null)
+                {
+                    audioManager.MusicReproduction(2);
+                }
+
+                if (Rat != null)
+                {
+                    Rat.SetActive(true);
+                }
             }
         }
     }
+    public int GetCheeseCount()
+    {
+        return cheeseCount;
+    }
+
 }

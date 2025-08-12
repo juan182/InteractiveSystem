@@ -1,44 +1,55 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField]
-    private List<AudioClip> effect = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> effect = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> music = new List<AudioClip>();
 
-    [SerializeField]
-    private List<AudioClip> music = new List<AudioClip>();
+    [Header("🎵 Volúmenes")]
+    [SerializeField, Range(0f, 1f)] private float musicVolume = 1f;
+    [SerializeField, Range(0f, 1f)] private float effectVolume = 1f;
 
-    private AudioSource audioSource;
+    private AudioSource musicSource;
+    private AudioSource effectSource;
 
     private void Awake()
     {
-        // Esto no es necesario
-        //Solo lo cree para que funcione asi no tengas audio
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
+        musicSource = gameObject.AddComponent<AudioSource>();
+        effectSource = gameObject.AddComponent<AudioSource>();
+
+        musicSource.loop = true;
+    }
+
+    private void Start()
+    {
+        // Música inicial
+        MusicReproduction(0);
     }
 
     public void EffectReproduction(int indice)
     {
-        if (indice >= 0 && indice < effect.Count)
+        if (indice >= 0 && indice < effect.Count && effect[indice] != null)
         {
-            audioSource.loop = false;
-            audioSource.clip = effect[indice];
-            audioSource.Play();
+            effectSource.volume = effectVolume; // 🔹 Usar volumen de efectos
+            effectSource.PlayOneShot(effect[indice]);
         }
     }
 
     public void MusicReproduction(int indice)
     {
-        if (indice >= 0 && indice < music.Count)
+        if (indice >= 0 && indice < music.Count && music[indice] != null)
         {
-            audioSource.clip = music[indice];
-            audioSource.loop = true; // aseguramos que s� se repita
-            audioSource.Play();
+            musicSource.volume = musicVolume; // 🔹 Usar volumen de música
+            musicSource.clip = music[indice];
+            musicSource.Play();
         }
+    }
+
+    // 🔹 Permite cambiar volumen en tiempo real desde el inspector
+    private void Update()
+    {
+        musicSource.volume = musicVolume;
+        effectSource.volume = effectVolume;
     }
 }
